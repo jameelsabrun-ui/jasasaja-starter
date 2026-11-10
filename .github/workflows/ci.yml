@@ -18,7 +18,7 @@ jobs:
       XENDIT_CALLBACK_TOKEN: dummy-callback-token-0000
       AUTH_SECRET: dummy-auth-secret-dummy-auth-secret-0000
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v4   # versi dibaca dari packageManager di package.json
       - uses: actions/setup-node@v4
         with:
@@ -33,7 +33,7 @@ jobs:
   secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: gitleaks (seluruh riwayat, termasuk pesan commit)
