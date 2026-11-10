@@ -1,0 +1,8 @@
+title = "JASASAJA gitleaks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Contoh dan nilai dummy"
+paths = ['''\.env\.example$''', '''pnpm-lock\.yaml$''']

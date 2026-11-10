@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      # Nilai DUMMY hanya agar build lolos validasi env. Jangan pakai nilai ini di production.
+      DATABASE_URL: postgresql://u:p@localhost/db?sslmode=require
+      UPSTASH_REDIS_REST_URL: https://dummy.upstash.io
+      UPSTASH_REDIS_REST_TOKEN: dummytokendummy
+      XENDIT_CALLBACK_TOKEN: dummy-callback-token-0000
+      AUTH_SECRET: dummy-auth-secret-dummy-auth-secret-0000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4   # versi dibaca dari packageManager di package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks (seluruh riwayat, termasuk pesan commit)
+        run: |
+          docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest detect \
+            --source=/repo --config=/repo/.gitleaks.toml --redact --no-banner --log-opts="--all"

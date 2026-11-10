@@ -1,0 +1,21 @@
+# dependensi & build
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# rahasia: hanya .env.example yang boleh masuk repo
+.env
+.env.*
+!.env.example
+
+# lain-lain
+coverage/
+.vercel/
+.DS_Store
+*.log
+*.pem
+*.key
