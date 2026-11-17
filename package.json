@@ -19,7 +19,7 @@
     "setup:hooks": "sh scripts/install-hooks.sh"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.2.0",
+    "@neondatabase/serverless": "^1.2.1",
     "@upstash/ratelimit": "^2.2.0",
     "@upstash/redis": "^1.41.0",
     "drizzle-orm": "^0.45.4",
